@@ -1,0 +1,29 @@
+# Documentation and Templates
+# These files are for reference only and shouldn't be committed to the repo
+*_TEMPLATE.md
+
+# Arduino IDE files
+*.hex
+*.eep
+*.elf
+*.map
+
+# Build artifacts
+build/
+*.o
+*.a
+
+# Temporary files
+*~
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# IDE specific
+.vscode/
+.idea/
+*.sublime-*
+
+# Logs
+*.log
