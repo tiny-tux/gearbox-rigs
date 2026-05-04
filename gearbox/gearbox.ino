@@ -1,10 +1,10 @@
 /*
  * Gearbox
- * v1.0
+ * v1.2
  * Last Updated: 2026-05-04
  * Updated By: Sam Knox
  *
- * **Firmware Status: Deployed**
+ * **Firmware Status: Untested**
  * **Hardware Status: Operational**
  * 
  * Measures motor RPM during gear ratio testing.
@@ -26,7 +26,6 @@
  */
 
 #include <LiquidCrystal_I2C.h>
-#include <Wire.h> 
 #include <Encoder.h>
 
 // ============================================================================
@@ -47,8 +46,8 @@
 #define LCD_ROWS 2
 
 // Timing
-#define UPDATE_INTERVAL_MS 200
-#define CURRENT_SAMPLES 70
+#define UPDATE_INTERVAL_MS 50
+#define RPM_AVERAGE_SIZE 3
 
 // ============================================================================
 // HARDWARE OBJECTS
@@ -91,9 +90,9 @@ void setup() {
   lcd.backlight();
   lcd.setCursor(0, 0);
 
-  lcd.print("   ENGME353");
+  lcd.print("Gearbox Rig");
   lcd.setCursor(0,1);
-  lcd.print("  Gearbox Rig");
+  lcd.print("v1.2");
 
   delay(2000);
   
@@ -137,9 +136,22 @@ double calculateRPM(double currentCount, double lastCount,
 
   double countDelta = currentCount - lastCount;
   double timeDelta = currentTime - lastTime;
+  double rpm = (countDelta / timeDelta) * 1000000.0 * 60.0 / (ENCODER_CPR / STAGE_RATIO);
 
-  // Convert to RPM: (counts/microsecond) * (1000000 us/s) * (60 s/min) / (counts/rev)
-  return (countDelta / timeDelta) * 1000000.0 * 60.0 / (ENCODER_CPR / STAGE_RATIO);
+  // Rolling average
+  static double rpmBuffer[RPM_AVERAGE_SIZE] = {0};
+  static int bufferIndex = 0;
+  static int sampleCount = 0;
+
+  rpmBuffer[bufferIndex] = rpm;
+  bufferIndex = (bufferIndex + 1) % RPM_AVERAGE_SIZE;
+  if (sampleCount < RPM_AVERAGE_SIZE) sampleCount++;
+
+  double sum = 0;
+  for (int i = 0; i < sampleCount; i++) {
+    sum += rpmBuffer[i];
+  }
+  return sum / sampleCount;
 }
 
 // ============================================================================

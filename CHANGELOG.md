@@ -1,6 +1,30 @@
 # Changelog
 
-All releases are listed newest first. Each release applies to all rigs in the repository.
+All releases are listed newest first.
+
+## [v1.2] - 2026-05-04
+
+**Status:** Development
+
+Adding RPM averaging and testing removal of redundant library.
+
+### Changes
+
+**Firmware:**
+- Changed: Removed Wire.h library
+- Added: RPM averaging
+- Added: Version display on boot
+
+**Hardware:**
+- None
+
+**Known Issues:**
+- None
+
+**Migration Notes:**
+- None
+
+---
 
 ## [v1.1] - 2026-05-04
 

@@ -6,13 +6,13 @@ Gearbox system for measuring torque output at different gear ratio stages.
 
 **Latest Stable (main branch):** v1.1 - All rigs deployed and tested as of Week 8 Lab, A-trimester 2026
 
-**In Development (dev branch):** Nothing currently under development
+**In Development (dev branch):** v1.2 - Adding RPM averaging and testing removal of redundant library.
 
 
 ## Rig Overview
 
-- **Version:** v1.1
-- **Status:** Stable
+- **Version:** v1.2
+- **Status:** Under development
 - **Location:** LSL.1.02
 - **Purpose:** Display motor RPM during gear ratio testing.
 
@@ -73,13 +73,12 @@ See [VERSIONING_GUIDE.md](./VERSIONING_GUIDE.md) for detailed workflow.
 ## Documentation
 
 - **[CHANGELOG.md](./CHANGELOG.md)** - Version history and changes for all rigs
-- **VERSIONING_GUIDE.md** - Version control and release workflow
+- **[VERSIONING_GUIDE.md](./VERSIONING_GUIDE.md)** - Version control and release workflow
 
 ## Common Libraries
 
 - LiquidCrystal_I2C (LCD display)
 - Encoder (speed measurements)
-- Wire (possibly redundant)
 
 ## Contributing
 
