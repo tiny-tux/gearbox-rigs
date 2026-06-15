@@ -26,22 +26,36 @@
 
  }
 
- void main() {
+ void loop() {
 
  }
 ```
 
 ## Releasing
+
+### Pre-release
 ```bash
-# Creating a pre-release (stay on dev branch, mark as pre-release on GitHub)
+# Stay on dev branch, mark as pre-release on GitHub
 git tag -a v1.1 -m "Description"
 git push origin dev --tags
+```
 
-# Creating a stable release
+### Stable Release
+```bash
+# 1. Push dev to GitHub
+git push
+
+# 2. Open a pull request on GitHub: dev → main
+# 3. Merge the pull request on GitHub
+
+# 4. Pull main locally and tag
 git checkout main
-git merge dev
+git pull
 git tag -a v1.1 -m "Description"
-git push origin main --tags
+git push origin --tags
+
+# 5. Switch back to dev
+git checkout dev
 ```
 
 ### GitHub Release Template
